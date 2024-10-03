@@ -21,16 +21,42 @@ page = st.sidebar.radio("Navigate", ["Objective", "API", "Data Overview", "Explo
 @st.cache_data
 def load_data():
     intervals = ['5m', '15m', '30m', '1h', '6h', '12h']
-    dataframes = {}
-    
+    data_dict = {}
+
+    base_url = "https://raw.githubusercontent.com/Harry262000/pi42/main/data/raw/BTCINR_"
+
     for interval in intervals:
-        file_path = os.path.join("data", "raw")
-        df = pd.read_csv(f"D:/Github/pi42/data/raw/BTCINR_5m_data.csv")  #D:\Github\Pi42\data
-        df['startTime'] = pd.to_datetime(df['startTime'], unit='ms')
-        df['endTime'] = pd.to_datetime(df['endTime'], unit='ms')
-        df.set_index('startTime', inplace=True)
-        dataframes[interval] = df
-    return dataframes
+        try:
+            # Construct the raw GitHub URL for each interval
+            url = f"{base_url}{interval}_data.csv"
+            print(f"Loading data for interval: {interval} from {url}")
+
+            # Load the CSV data
+            df = pd.read_csv(url)
+            df['startTime'] = pd.to_datetime(df['startTime'], unit='ms')
+            df['endTime'] = pd.to_datetime(df['endTime'], unit='ms')
+            df.set_index('startTime', inplace=True)
+            data_dict[interval] = df
+            print(f"Data for {interval} loaded successfully.")
+
+        except Exception as e:
+            print(f"Error loading data for {interval}: {e}")
+
+    return data_dict
+
+
+# def load_data():
+#     intervals = ['5m', '15m', '30m', '1h', '6h', '12h']
+#     dataframes = {}
+#
+#     for interval in intervals:
+#         file_path = os.path.join("data", "raw")
+#         df = pd.read_csv(f"https://raw.githubusercontent.com/Harry262000/pi42/main/data/raw/BTCINR_{intervals}_data.csv")  #D:\Github\Pi42\data
+#         df['startTime'] = pd.to_datetime(df['startTime'], unit='ms')
+#         df['endTime'] = pd.to_datetime(df['endTime'], unit='ms')
+#         df.set_index('startTime', inplace=True)
+#         dataframes[interval] = df
+#     return dataframes
 # def load_data():
 #     intervals = ['5m', '15m', '30m', '1h', '6h', '12h']
 #     dataframes = {}
