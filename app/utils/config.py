@@ -1,0 +1,1 @@
+# Configuration file for API keys and env variables

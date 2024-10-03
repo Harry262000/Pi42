@@ -1,0 +1,17 @@
+requests
+websocket
+ccxt
+pandas
+pandas-ta
+scikit-learn
+xgboost
+matplotlib
+seaborn
+plotly==5.3.1
+backtrader
+websocket-client
+pyarrow
+statsmodels  
+prophet      
+tensorflow
+streamlit

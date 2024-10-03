@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: pi42-crypto-analysis
+Version: 0.1.0
+Summary: Cryptocurrency analysis using Streamlit and Pi42 API
+Home-page: https://github.com/Harry262000/pi42_crypto_analysis
+Author: Harshal Honde
+Author-email: Harshalhonde50@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Requires-Dist: streamlit
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: requests
+Requires-Dist: ta-lib
