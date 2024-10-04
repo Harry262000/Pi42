@@ -26,8 +26,7 @@ def load_data():
     dataframes = {}
 
     for interval in intervals:
-        file_path = os.path.join("data", "raw")
-        df = pd.read_csv(f"BTCINR_{interval}_data.csv")  # D:\Github\Pi42\data
+        df = pd.read_csv(f"/workspaces/pi42/app/BTCINR_{interval}_data.csv")  # D:\Github\Pi42\data
         df['startTime'] = pd.to_datetime(df['startTime'], unit='ms')
         df['endTime'] = pd.to_datetime(df['endTime'], unit='ms')
         df.set_index('startTime', inplace=True)
