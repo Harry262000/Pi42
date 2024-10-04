@@ -75,12 +75,11 @@ elif page == "Exploratory Analysis":
 
     # Check if the selected interval is valid
     if selected_interval in data_dict:
-        # Initialize EDA with both data_dict and selected_interval
-        eda = EDA(data_dict, selected_interval)  # Pass both arguments
+        eda = EDA(data_dict, selected_interval)  
 
         # Basic statistics
         st.subheader("Basic Statistics")
-        st.write(eda.df.describe())  # Use eda.df to display basic statistics
+        st.write(eda.df.describe()) 
 
         # Let users select which analysis they want to perform
         st.subheader("Select EDA Options")
@@ -131,19 +130,15 @@ elif page == "Forecasting":
 
     selected_model = st.selectbox("Select Forecasting Model", models)
 
-    # Load your data first
     data_dict = load_data()
 
-    # Get the DataFrame based on the selected model's time frame
-    df = data_dict[selected_model.split(' ')[-2]]  # Assumes the interval is in the model name
+    df = data_dict[selected_model.split(' ')[-2]]  
 
-    # Create an instance of the ForecastingModels class
     forecaster = ForecastingModels(df)
 
     # Button to run the forecast
     if st.button("Run Forecast"):
         with st.spinner("Running the model, please wait..."):
-            # Execute the selected forecasting model and get predictions
             if selected_model == "ARIMA (5-Minute Forecast)":
                 predictions = forecaster.arima_forecast()
             elif selected_model == "Random Forest (15-Minute Forecast)":
