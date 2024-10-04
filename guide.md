@@ -25,16 +25,6 @@ The goal of this project is to demonstrate the ability to work with real-time cr
 ## File Structure
 
     ```plaintext
-    .
-    ├── api
-    │   └── api.py                    # API integration code
-    ├── data
-    │   ├── BTCINR_5m_data.csv        # Data for 5-minute intervals
-    │   ├── BTCINR_15m_data.csv       # Data for 15-minute intervals
-    │   ├── BTCINR_30m_data.csv       # Data for 30-minute intervals
-    │   ├── BTCINR_1h_data.csv        # Data for 1-hour intervals
-    │   ├── BTCINR_6h_data.csv        # Data for 6-hour intervals
-    │   └── BTCINR_12h_data.csv       # Data for 12-hour intervals
     ├── utils
     │   ├── content.py                # Project description and API handling
     │   ├── EDA.py                    # EDA functions
@@ -45,27 +35,27 @@ The goal of this project is to demonstrate the ability to work with real-time cr
 ## Sections and Functionality
 
 ### Objective
-**File Path**: `main.py`  
+**File Path**: [`main.py`](./main.py)
 **Description**: This section outlines the project's goals, including the ability to analyze cryptocurrency data and apply machine learning techniques.
 
 ### API Integration
-**File Path**: `api/api.py`  
+**File Path**: [`api/api.py`](.app/utils/data_retrieval.py)  
 **Description**: This section provides an overview of how the Pi42 API is integrated, including fetching live data for analysis.
 
 ### Data Overview
-**File Path**: `utils/visualization.py`  
+**File Path**: [`utils/visualization.py`](utils/visualization.py)  
 **Description**: This section loads and displays various data intervals using the `DataVisualizer` class.
 
 ### Exploratory Analysis (EDA)
-**File Path**: `utils/EDA.py`  
+**File Path**: [`utils/EDA.py`](utils/EDA.py)  
 **Description**: This section provides multiple EDA options such as price change analysis, volume analysis, and moving average analysis.
 
 ### Forecasting Models
-**File Path**: `utils/forecasting_models.py`  
+**File Path**: [`utils/forecasting_models.py`](utils/forecasting_models.py)  
 **Description**: This section is currently under development. Forecasting models like ARIMA, Random Forest, and LSTM will be implemented here.
 
 ### Backtesting
-**File Path**: `main.py`  
+**File Path**: [`main.py`](./main.py)  
 **Description**: This section will outline the backtesting framework for validating forecasting models.
 
 ## Known Issues
