@@ -7,15 +7,16 @@ import xgboost as xgb
 from statsmodels.tsa.arima.model import ARIMA
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
-#from fbprophet import Prophet
+from fbprophet import Prophet
 
 
 class ForecastingModels:
     def __init__(self, df):
         print(df.head())  # Check the first few rows of the DataFrame
         print(df.columns)  # List all columns in the DataFrame
+        df.columns = df.columns.str.strip()
         self.df = df
-        self.df.set_index('startTime', inplace=True)
+        #self.df.set_index('startTime', inplace=True)
 
     def arima_forecast(self):
         model = ARIMA(self.df['close'], order=(5, 1, 0))  # Example order
@@ -142,26 +143,26 @@ class ForecastingModels:
 
         return predicted_price
 
-    # def prophet_forecast(self):
-    #     # Prepare the data for Prophet
-    #     df_prophet = self.df.reset_index().rename(columns={'timestamp': 'ds', 'close': 'y'})
-    #
-    #     # Model training
-    #     model = Prophet()
-    #     model.fit(df_prophet)
-    #
-    #     # Future dataframe for predictions
-    #     future = model.make_future_dataframe(periods=6, freq='H')  # 6 hours into the future
-    #     forecast = model.predict(future)
-    #
-    #     # Plotting
-    #     fig = model.plot(forecast)
-    #     plt.title('6-Hour Forecast using Prophet')
-    #     plt.xlabel('Time')
-    #     plt.ylabel('Price')
-    #     plt.show()
-    #
-    #     return forecast
+    def prophet_forecast(self):
+        # Prepare the data for Prophet
+        df_prophet = self.df.reset_index().rename(columns={'timestamp': 'ds', 'close': 'y'})
+    
+        # Model training
+        model = Prophet()
+        model.fit(df_prophet)
+    
+        # Future dataframe for predictions
+        future = model.make_future_dataframe(periods=6, freq='H')  
+        forecast = model.predict(future)
+    
+        # Plotting
+        fig = model.plot(forecast)
+        plt.title('6-Hour Forecast using Prophet')
+        plt.xlabel('Time')
+        plt.ylabel('Price')
+        plt.show()
+    
+        return forecast
 
     def xgboost_forecast(self):
         self.df['lag_1'] = self.df['close'].shift(1)

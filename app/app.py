@@ -27,7 +27,7 @@ def load_data():
     dataframes = {}
 
     for interval in intervals:
-        df = pd.read_csv(f"/workspaces/pi42/app/BTCINR_{interval}_data.csv")  # D:\Github\Pi42\data
+        df = pd.read_csv(f"BTCINR_{interval}_data.csv")  # D:\Github\Pi42\data
         df['startTime'] = pd.to_datetime(df['startTime'], unit='ms')
         df['endTime'] = pd.to_datetime(df['endTime'], unit='ms')
         df.set_index('startTime', inplace=True)
@@ -119,67 +119,56 @@ elif page == "Exploratory Analysis":
 
 # Forecasting Page
 elif page == "Forecasting":
-    st.header("Price Forecasting")
-    st.write("## Forecasting Models Overview")
-
-    # Provide a dropdown for model selection
-    models = ["5-Minute Forecast (ARIMA)",
-              "15-Minute Forecast (Random Forest)",
-              "30-Minute Forecast (Gradient Boosting)",
-              "1-Hour Forecast (LSTM)",
-              "6-Hour Forecast (Prophet)",
-              "12-Hour Forecast (XGBoost)"]
+   # Provide a dropdown for model selection, which includes time frames
+    models = [
+        "ARIMA (5-Minute Forecast)",
+        "Random Forest (15-Minute Forecast)",
+        "Gradient Boosting (30-Minute Forecast)",
+        "LSTM (1-Hour Forecast)",
+        "Prophet (6-Hour Forecast)",
+        "XGBoost (12-Hour Forecast)"
+    ]
 
     selected_model = st.selectbox("Select Forecasting Model", models)
 
     # Load your data first
     data_dict = load_data()
-    selected_interval = st.selectbox("Select Interval", list(data_dict.keys()))
-    df = data_dict[selected_interval]
+
+    # Get the DataFrame based on the selected model's time frame
+    df = data_dict[selected_model.split(' ')[-2]]  # Assumes the interval is in the model name
 
     # Create an instance of the ForecastingModels class
     forecaster = ForecastingModels(df)
 
-    # Display the last run result if available
-    if 'last_predictions' in st.session_state:
-        st.subheader("Last Run Predictions")
-        st.write(st.session_state.last_predictions)
-
-    # Check last run time
-    current_time = time.time()
-    last_run_time = st.session_state.get('last_run_time', 0)
-    time_diff = current_time - last_run_time
-
     # Button to run the forecast
     if st.button("Run Forecast"):
-        if time_diff < 5:  # You can adjust this value to 10 for a longer wait
-            st.warning("Please wait a few seconds before running the model again.")
-        else:
-            with st.spinner("Running the model, please wait..."):
-                # Execute the selected forecasting model
-                if selected_model == "5-Minute Forecast (ARIMA)":
-                    predictions = forecaster.arima_forecast()
-                elif selected_model == "15-Minute Forecast (Random Forest)":
-                    predictions = forecaster.random_forest_forecast()
-                elif selected_model == "30-Minute Forecast (Gradient Boosting)":
-                    predictions = forecaster.gradient_boosting_forecast()
-                elif selected_model == "1-Hour Forecast (LSTM)":
-                    predicted_price = forecaster.lstm_forecast()
-                    predictions = predicted_price  # Adjust as needed
-                elif selected_model == "6-Hour Forecast (Prophet)":
-                    forecast = forecaster.prophet_forecast()
-                    predictions = forecast  # Adjust as needed
-                elif selected_model == "12-Hour Forecast (XGBoost)":
-                    predictions = forecaster.xgboost_forecast()
+        with st.spinner("Running the model, please wait..."):
+            # Execute the selected forecasting model and get predictions
+            if selected_model == "ARIMA (5-Minute Forecast)":
+                predictions = forecaster.arima_forecast()
+            elif selected_model == "Random Forest (15-Minute Forecast)":
+                predictions = forecaster.random_forest_forecast()
+            elif selected_model == "Gradient Boosting (30-Minute Forecast)":
+                predictions = forecaster.gradient_boosting_forecast()
+            elif selected_model == "LSTM (1-Hour Forecast)":
+                predictions = forecaster.lstm_forecast()
+            elif selected_model == "Prophet (6-Hour Forecast)":
+                predictions = forecaster.prophet_forecast()
+            elif selected_model == "XGBoost (12-Hour Forecast)":
+                predictions = forecaster.xgboost_forecast()
 
-                # Store the last predictions and current time in session state
-                st.session_state.last_predictions = predictions
-                st.session_state.last_run_time = current_time
+            # Display the predictions as a table
+            st.subheader("Current Predictions")
+            st.write(predictions)
 
-                # Display the predictions after running the model
-                st.subheader("Current Predictions")
-                st.write(predictions)
-
+            # Plot the predictions
+            plt.figure(figsize=(10, 5))
+            plt.plot(predictions.index, predictions['close'], label='Predicted Prices', color='blue')
+            plt.title(f'{selected_model} Predictions')
+            plt.xlabel('Time')
+            plt.ylabel('Price')
+            plt.legend()
+            st.pyplot(plt)
 # Backtesting Page
 elif page == "Backtesting":
     st.header("Backtesting")
