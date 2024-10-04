@@ -39,19 +39,19 @@ The goal of this project is to demonstrate the ability to work with real-time cr
 **Description**: This section outlines the project's goals, including the ability to analyze cryptocurrency data and apply machine learning techniques.
 
 ### API Integration
-**File Path**: [`api/api.py`](.app/utils/data_retrieval.py)  
+**File Path**: [`api/api.py`](app/utils/data_retrieval.py)  
 **Description**: This section provides an overview of how the Pi42 API is integrated, including fetching live data for analysis.
 
 ### Data Overview
-**File Path**: [`utils/visualization.py`](utils/visualization.py)  
+**File Path**: [`utils/visualization.py`](app/utils/visualization.py)  
 **Description**: This section loads and displays various data intervals using the `DataVisualizer` class.
 
 ### Exploratory Analysis (EDA)
-**File Path**: [`utils/EDA.py`](utils/EDA.py)  
+**File Path**: [`utils/EDA.py`](app/utils/EDA.py)  
 **Description**: This section provides multiple EDA options such as price change analysis, volume analysis, and moving average analysis.
 
 ### Forecasting Models
-**File Path**: [`utils/forecasting_models.py`](utils/forecasting_models.py)  
+**File Path**: [`utils/forecasting_models.py`](app/utils/forecasting_models.py)  
 **Description**: This section is currently under development. Forecasting models like ARIMA, Random Forest, and LSTM will be implemented here.
 
 ### Backtesting
