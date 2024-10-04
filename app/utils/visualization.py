@@ -4,6 +4,7 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
 
+
 class DataVisualizer:
     def __init__(self, data_dict):
         self.data_dict = data_dict
@@ -66,14 +67,14 @@ class DataVisualizer:
     def display_trend_analysis(self):
         st.write("### Trend Analysis")
         col1, col2, col3 = st.columns(3)
-        with col1:    
+        with col1:
             st.write("#### Short-term (5m, 15m):")
             st.write("""
             - Highly volatile with rapid price fluctuations
             - Potential for scalping strategies
             - Requires real-time analysis and quick decision making
             """)
-        with col2:   
+        with col2:
             st.write("#### Medium-term (30m, 1h):")
             st.write("""
             - Shows an overall upward trend with significant oscillations
@@ -87,5 +88,6 @@ class DataVisualizer:
             - Ideal for swing trading strategies
             - Helps in identifying major support and resistance levels
             """)
+
 
 

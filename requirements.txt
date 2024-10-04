@@ -1,6 +1,7 @@
 requests
 websocket
 ccxt
+numpy
 pandas
 pandas-ta
 scikit-learn
@@ -15,3 +16,5 @@ statsmodels
 prophet      
 tensorflow
 streamlit
+keras
+fbprophet

@@ -16,14 +16,14 @@ def create_project_structure():
             'pages': {
                 'exploration.py': '# Data exploration and visualization',
                 'indicators.py': '# Technical indicators and feature engineering',
-                'modeling.py': '# Model training and prediction',
+                'forecasting_models.py': '# Model training and prediction',
                 'backtesting.py': '# Backtesting and validation',
                 'insights.py': '# Final insights and conclusions',
             },
             'utils': {
                 'data_retrieval.py': '# Fetch data from Pi42 API/WebSocket',
-                'feature_engineering.py': '# Calculate technical indicators like MA, RSI',
-                'modeling.py': '# Model training and prediction functions',
+                'EDA.py': '# Calculate technical indicators like MA, RSI',
+                'forecasting_models.py': '# Model training and prediction functions',
                 'backtesting.py': '# Backtesting strategy implementation',
                 'visualization.py': '# Helper functions for charts using Matplotlib',
                 'config.py': '# Configuration file for API keys and env variables',
