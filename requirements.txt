@@ -1,7 +1,7 @@
 requests
 websocket
 ccxt
-numpy
+numpy==1.24.3
 pandas
 pandas-ta
 scikit-learn
@@ -12,9 +12,9 @@ plotly==5.3.1
 backtrader
 websocket-client
 pyarrow
-statsmodels  
-prophet      
+statsmodels       
 tensorflow
 streamlit
 keras
 fbprophet
+pystan
